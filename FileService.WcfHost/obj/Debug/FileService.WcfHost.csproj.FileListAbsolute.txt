@@ -1,0 +1,25 @@
+D:\projects\dotnet\FileService\FileService.WcfHost\bin\FileService.WcfHost.dll
+D:\projects\dotnet\FileService\FileService.WcfHost\bin\FileService.WcfHost.pdb
+D:\projects\dotnet\FileService\FileService.WcfHost\bin\ICSharpCode.SharpZipLib.dll
+D:\projects\dotnet\FileService\FileService.WcfHost\obj\Debug\ResolveAssemblyReference.cache
+D:\projects\dotnet\FileService\FileService.WcfHost\obj\Debug\FileService.WcfHost.dll
+D:\projects\dotnet\FileService\FileService.WcfHost\obj\Debug\FileService.WcfHost.pdb
+E:\Allen\projects\controls\FileService\FileService.WcfHost\bin\FileService.WcfHost.dll
+E:\Allen\projects\controls\FileService\FileService.WcfHost\bin\FileService.WcfHost.pdb
+E:\Allen\projects\controls\FileService\FileService.WcfHost\bin\ICSharpCode.SharpZipLib.dll
+E:\Allen\projects\controls\FileService\FileService.WcfHost\obj\Debug\ResolveAssemblyReference.cache
+E:\Allen\projects\controls\FileService\FileService.WcfHost\obj\Debug\FileService.WcfHost.dll
+E:\Allen\projects\controls\FileService\FileService.WcfHost\obj\Debug\FileService.WcfHost.pdb
+C:\Users\Allen\Downloads\FileService\FileService.WcfHost\bin\FileService.WcfHost.dll
+C:\Users\Allen\Downloads\FileService\FileService.WcfHost\bin\FileService.WcfHost.pdb
+C:\Users\Allen\Downloads\FileService\FileService.WcfHost\bin\ICSharpCode.SharpZipLib.dll
+C:\Users\Allen\Downloads\FileService\FileService.WcfHost\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Allen\Downloads\FileService\FileService.WcfHost\obj\Debug\FileService.WcfHost.dll
+C:\Users\Allen\Downloads\FileService\FileService.WcfHost\obj\Debug\FileService.WcfHost.pdb
+C:\Users\sh2dow\Documents\Visual Studio 2015\Projects\FileService\FileService.WcfHost\bin\FileService.WcfHost.dll.config
+C:\Users\sh2dow\Documents\Visual Studio 2015\Projects\FileService\FileService.WcfHost\bin\FileService.WcfHost.dll
+C:\Users\sh2dow\Documents\Visual Studio 2015\Projects\FileService\FileService.WcfHost\bin\FileService.WcfHost.pdb
+C:\Users\sh2dow\Documents\Visual Studio 2015\Projects\FileService\FileService.WcfHost\bin\ICSharpCode.SharpZipLib.dll
+C:\Users\sh2dow\Documents\Visual Studio 2015\Projects\FileService\FileService.WcfHost\obj\Debug\FileService.WcfHost.csprojResolveAssemblyReference.cache
+C:\Users\sh2dow\Documents\Visual Studio 2015\Projects\FileService\FileService.WcfHost\obj\Debug\FileService.WcfHost.dll
+C:\Users\sh2dow\Documents\Visual Studio 2015\Projects\FileService\FileService.WcfHost\obj\Debug\FileService.WcfHost.pdb

@@ -1,7 +1,0 @@
-C:\Users\sh2dow\Documents\Visual Studio 2015\Projects\WcfFileManager\Wcf-Sample-Net4\bin\Wcf-Sample-Net4.dll.config
-C:\Users\sh2dow\Documents\Visual Studio 2015\Projects\WcfFileManager\Wcf-Sample-Net4\bin\Wcf-Sample-Net4.dll
-C:\Users\sh2dow\Documents\Visual Studio 2015\Projects\WcfFileManager\Wcf-Sample-Net4\bin\Wcf-Sample-Net4.pdb
-C:\Users\sh2dow\Documents\Visual Studio 2015\Projects\WcfFileManager\Wcf-Sample-Net4\bin\Microsoft.IdentityModel.dll
-C:\Users\sh2dow\Documents\Visual Studio 2015\Projects\WcfFileManager\Wcf-Sample-Net4\obj\Debug\Wcf-Sample-Net4.csprojResolveAssemblyReference.cache
-C:\Users\sh2dow\Documents\Visual Studio 2015\Projects\WcfFileManager\Wcf-Sample-Net4\obj\Debug\Wcf-Sample-Net4.dll
-C:\Users\sh2dow\Documents\Visual Studio 2015\Projects\WcfFileManager\Wcf-Sample-Net4\obj\Debug\Wcf-Sample-Net4.pdb
