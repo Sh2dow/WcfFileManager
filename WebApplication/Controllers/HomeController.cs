@@ -7,7 +7,6 @@ using System.Net;
 using System.Runtime.Serialization.Json;
 using System.Web;
 using System.Web.Mvc;
-using System.Threading.Tasks;
 
 namespace WebApplication.Controllers
 {

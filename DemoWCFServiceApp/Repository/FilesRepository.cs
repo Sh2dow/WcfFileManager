@@ -13,16 +13,15 @@ namespace DemoWCFServiceApp.Repository
         private string localPath { get; set; }
         //private string filePath = AppDomain.CurrentDomain.BaseDirectory;
 
-        public FilesRepository(string path = "")
+        public FilesRepository()
         {
-            path = AppDomain.CurrentDomain.BaseDirectory;
-            //this.localPath = path == "secret" ? "secret" : HttpUtility.UrlDecode(path);
-            this.localPath = path == "secret" ? "secret" : path;
         }
 
-        IEnumerable<FSItem> IFileRepository.GetAllFiles()
+        IEnumerable<FSItem> IFileRepository.GetAllFiles(string path)
         {
-            var json = GetAllFiles(AppDomain.CurrentDomain.BaseDirectory).Result;
+            this.localPath = path == "secret" ? "secret" : HttpUtility.UrlDecode(path);
+            //localPath = path == "secret" ? "secret" : path;
+            var json = GetAllFiles(localPath).Result;
             return json;
         }
 
