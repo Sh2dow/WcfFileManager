@@ -1,11 +1,10 @@
-﻿@model  IEnumerable<WebApplication.Models.File>
+﻿@model  IEnumerable<WebApplication.Models.FileEntity>
 
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <link href="~/Content/index.css" rel="stylesheet" />
 
-<h3>Customer Page</h3>
+<h2>File Manager</h2>
 @{
-    var grid = new WebGrid(Model, canPage: true, rowsPerPage: 15,
+    var grid = new WebGrid(Model, canPage: true, rowsPerPage: 20,
     selectionFieldName: "selectedRow");
     grid.Pager(WebGridPagerModes.NextPrevious);}
 
@@ -16,29 +15,27 @@
             selectedRowStyle: "select",
             rowStyle: "webgrid-row-style",
             columns: grid.Columns(
-            grid.Column("CustomerId", "Customer Id", @<text> <span id="spnCustomerId">@item.CustomerId</span></text>,
+            grid.Column("FileId", "FileId", @<text> <span id="spnCustomerId">@item.FileId</span></text>,
                          canSort: false, style: "customerId"),
 
-            grid.Column("CustomerName", "Customer Name", format: @<text>
-                    <span id="spnCustomerName" class="display-mode">@item.CustomerName</span>
-                    <input type="text" id="CustomerName" value="@item.CustomerName" class="edit-mode" /></text>,
+            grid.Column("Filename", "Filename", format: @<text>
+                    <span id="spnFileName" class="display-mode">@item.FileName</span>
+                    <input type="text" id="FileName" value="@item.FileName" class="edit-mode" /></text>,
                        canSort: false),
 
-            grid.Column("CustomerAddress", "Customer Address", format: @<text>
-                    <span id="spnCustomerAddress" class="display-mode">@item.CustomerAddress</span>
-                    <input type="text" id="CustomerAddress" value="@item.CustomerAddress" class="edit-mode" /></text>,
+            grid.Column("Filesize", "Filesize", format: @<text>
+                    <span id="spnFileSize" class="display-mode">@item.FileSize</span>
+                    <input type="text" id="FileSize" value="@item.FileSize" class="edit-mode" /></text>,
                        canSort: false),
 
             grid.Column("Action", format: @<text>
-                    <img src="~/Content/images/edit.jpg" title="Edit Customer" id="btnEdit" class="edit-button" />
-                    <img src="~/Content/images/delete.jpg" title="Delete Customer" class="delete-customer" />
+                    <img src="~/Content/images/edit.jpg" title="Edit File" id="btnEdit" class="edit-button" />
+                    <img src="~/Content/images/delete.jpg" title="Delete File" class="delete-File" />
             </text>, canSort: false, style: "action")
                           ))
 
 </div>
-<input type="button" value="New Customer" class="btnCustomerPV" />
-<div id="placeHolderCustomerPV">
+<input type="button" value="New File" class="btnFile" />
+<div id="placeHolderFile">
 </div>
 <script src="~/Scripts/app.js"></script>
-
-

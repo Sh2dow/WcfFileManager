@@ -23,3 +23,8 @@ C:\Users\sh2dow\Documents\Visual Studio 2015\Projects\FileService\FileService.Wc
 C:\Users\sh2dow\Documents\Visual Studio 2015\Projects\FileService\FileService.WcfHost\obj\Debug\FileService.WcfHost.csprojResolveAssemblyReference.cache
 C:\Users\sh2dow\Documents\Visual Studio 2015\Projects\FileService\FileService.WcfHost\obj\Debug\FileService.WcfHost.dll
 C:\Users\sh2dow\Documents\Visual Studio 2015\Projects\FileService\FileService.WcfHost\obj\Debug\FileService.WcfHost.pdb
+C:\Users\sh2dow\Documents\Visual Studio 2015\Projects\WcfFileManager\FileService.WcfHost\bin\FileService.WcfHost.dll.config
+C:\Users\sh2dow\Documents\Visual Studio 2015\Projects\WcfFileManager\FileService.WcfHost\bin\FileService.WcfHost.dll
+C:\Users\sh2dow\Documents\Visual Studio 2015\Projects\WcfFileManager\FileService.WcfHost\bin\FileService.WcfHost.pdb
+C:\Users\sh2dow\Documents\Visual Studio 2015\Projects\WcfFileManager\FileService.WcfHost\obj\Debug\FileService.WcfHost.dll
+C:\Users\sh2dow\Documents\Visual Studio 2015\Projects\WcfFileManager\FileService.WcfHost\obj\Debug\FileService.WcfHost.pdb

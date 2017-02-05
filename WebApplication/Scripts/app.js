@@ -15,7 +15,7 @@ $('.edit-button').on("click", function () {
 
         if (imageSource == '/Content/images/edit.jpg') {
             $(this).attr('src', '/Content/images/save.jpg');
-            $(this).attr('title', 'Save Customer');
+            $(this).attr('title', 'Save File');
         }
 
     }
@@ -25,20 +25,20 @@ $('.edit-button').on("click", function () {
         {
                       
             var selectedId = $(this).parents('tr').find('td:nth-child(1)').text().trim();
-            var selectedName = $(this).parents('tr').find('#CustomerName').val();
-            var selectedAddless = $(this).parents('tr').find('#CustomerAddress').val();
+            var selectedName = $(this).parents('tr').find('#FileName').val();
+            var selectedSize = $(this).parents('tr').find('#FileSize').val();
             // create object with updated values
-            var customerModel =
+            var FileModel =
                 {
-                    "CustomerId": selectedId,
-                    "CustomerName": selectedName,
-                    "CustomerAddress": selectedAddless
+                    "FileId": selectedId,
+                    "FileName": selectedName,
+                    "FileSize": selectedSize
                 };
             $.ajax({
-                url: '/Home/EditCustomer',
+                url: '/Home/EditFile',
                 type: 'POST',
                 contentType: 'application/json; charset=utf-8',
-                data: JSON.stringify(customerModel)
+                data: JSON.stringify(FileModel)
             });
 
             alert("Your data is saved");
@@ -57,14 +57,14 @@ $('a').click(function () {
     $(this).attr('data-swhglnk', 'false');
 });
 
-$('.delete-customer').click(function () {
+$('.delete-File').click(function () {
     var selectedId = $(this).parents('tr').find('td:nth-child(1)').text().trim();
-    var selectedName = $(this).parents('tr').find('#CustomerName').val();
-    var message = "Please confirm delete for Customer ID " + selectedId + ", and Name: " + selectedName + " ? \nClick 'OK' to delete otherwise 'Cancel'.";
+    var selectedName = $(this).parents('tr').find('#FileName').val();
+    var message = "Please confirm delete for File ID " + selectedId + ", and Name: " + selectedName + " ? \nClick 'OK' to delete otherwise 'Cancel'.";
     if (confirm(message) == true) {
         selectedId = $(this).parents('tr:first').children('td:first').text();
         $.ajax({
-            url: '/Home/DeleteCustomer',
+            url: '/Home/DeleteFile',
             data: { id: selectedId },
             type: 'POST',
             success: function () {
@@ -81,15 +81,15 @@ $('.delete-customer').click(function () {
     }
 });
 
-$('.btnCustomerPV').click(function () {
-    $('.btnCustomerPV').hide();
+$('.btnFile').click(function () {
+    $('.btnFile').hide();
 
     $.ajax({
         // Call CreatePartialView action method
-        url: '/Home/GetCustomerPV',
+        url: '/Home/GetFile',
         type: 'Get',
         success: function (data) {
-            $("#placeHolderCustomerPV").empty().append(data);
+            $("#placeHolderFile").empty().append(data);
 
         },
         error: function () {

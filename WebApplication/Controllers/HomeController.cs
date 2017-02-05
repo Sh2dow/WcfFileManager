@@ -7,88 +7,89 @@ using System.Net;
 using System.Runtime.Serialization.Json;
 using System.Web;
 using System.Web.Mvc;
+using System.Threading.Tasks;
 
 namespace WebApplication.Controllers
 {
     [Authorize]
     public class HomeController : Controller
     {
-        readonly string customerServiceUri = "http://localhost:1786/CustomerService.svc/";
+        readonly string FileServiceUri = "http://localhost:1786/FileService.svc/";
 
         public ActionResult Index()
         {
-            List<Models.File> customerList = new List<Models.File>();
-            using (WebClient webClient = new WebClient())
+            var FileList = new List<FSItem>();
+            using (var webClient = new WebClient())
             {
-                string dwml;
-                dwml = webClient.DownloadString(customerServiceUri + "GetAllCustomers");
-                customerList = JsonConvert.DeserializeObjectAsync<List<Models.File>>(dwml).Result;
+                var dwml = webClient.DownloadString(FileServiceUri + "GetAllFiles");
+                FileList.AddRange(JsonConvert.DeserializeObjectAsync<List<FSItem>>(dwml).Result);
             }
-            return View(customerList);
+            return View(FileList);
         }
 
         [HttpGet]
-        public ActionResult GetCustomerPV()
+        public ActionResult GetFile()
         {
-            return PartialView("CreateCustomerPV");
+            return PartialView("CreateFile");
         }
 
-        public ActionResult CreateCustomer(Models.File customer)
+        [HttpPost]
+        public ActionResult CreateFile(FSItem File)
         {
             using (WebClient wc = new WebClient())
             {
 
                 var ms = new MemoryStream();
-                var serializerToUplaod = new DataContractJsonSerializer(typeof(Models.File));
-                serializerToUplaod.WriteObject(ms, customer);
+                var serializerToUplaod = new DataContractJsonSerializer(typeof(FSItem));
+                serializerToUplaod.WriteObject(ms, File);
 
                 wc.Headers["Content-type"] = "application/json";
-                wc.UploadData(customerServiceUri + "AddCustomer", "POST", ms.ToArray());
+                wc.UploadData(FileServiceUri + "AddFile", "POST", ms.ToArray());
             }
 
             int pageToShow;
-            int totalCustomers;
-            List<Models.File> customerList = new List<Models.File>();
+            int totalFiles;
+            var FileList = new List<FSItem>();
 
-            using (WebClient webClient = new WebClient())
+            using (var webClient = new WebClient())
             {
-                string customerCount;
-                customerCount = webClient.DownloadString(customerServiceUri + "GetCustomersCount");
-                totalCustomers = Convert.ToInt32(customerCount);
+                string FileCount;
+                FileCount = webClient.DownloadString(FileServiceUri + "GetFilesCount");
+                totalFiles = Convert.ToInt32(FileCount);
             }
 
-            if (totalCustomers % 5 != 0)
-                pageToShow = (totalCustomers / 5) + 1;
-            else pageToShow = totalCustomers / 5;
+            if (totalFiles % 5 != 0)
+                pageToShow = (totalFiles / 5) + 1;
+            else pageToShow = totalFiles / 5;
 
             return Redirect(HttpRuntime.AppDomainAppVirtualPath + "?page=" + pageToShow);
         }
 
-        public void DeleteCustomer(int id)
+        public void DeleteFile(int id)
         {
-            using (WebClient wc = new WebClient())
+            using (var wc = new WebClient())
             {
 
-                MemoryStream ms = new MemoryStream();
-                DataContractJsonSerializer serializerToUplaod = new DataContractJsonSerializer(typeof(Models.File));
+                var ms = new MemoryStream();
+                var serializerToUplaod = new DataContractJsonSerializer(typeof(FSItem));
                 serializerToUplaod.WriteObject(ms, id);
 
                 wc.Headers["Content-type"] = "application/json";
-                wc.UploadData(customerServiceUri + "DeleteCustomer", "DELETE", ms.ToArray());
+                wc.UploadData(FileServiceUri + "DeleteFile", "DELETE", ms.ToArray());
             }
         }
 
-        public void EditCustomer(Models.File customer)
+        public void EditFile(FSItem File)
         {
             using (WebClient wc = new WebClient())
             {
 
-                MemoryStream ms = new MemoryStream();
-                DataContractJsonSerializer serializerToUplaod = new DataContractJsonSerializer(typeof(Models.File));
-                serializerToUplaod.WriteObject(ms, customer);
+                var ms = new MemoryStream();
+                var serializerToUplaod = new DataContractJsonSerializer(typeof(FSItem));
+                serializerToUplaod.WriteObject(ms, File);
 
                 wc.Headers["Content-type"] = "application/json";
-                wc.UploadData(customerServiceUri + "EditCustomer", "PUT", ms.ToArray());
+                wc.UploadData(FileServiceUri + "EditFile", "PUT", ms.ToArray());
             }
         }
     }
