@@ -20,7 +20,7 @@ namespace WebApplication.Controllers
             var FileList = new List<FSItem>();
             using (var webClient = new WebClient())
             {
-                var dwml = webClient.DownloadString(FileServiceUri + "GetAllFiles");
+                var dwml = webClient.DownloadString(FileServiceUri + "GetAllFiles?path=" + HttpRuntime.AppDomainAppPath);
                 FileList.AddRange(JsonConvert.DeserializeObjectAsync<List<FSItem>>(dwml).Result);
             }
             return View(FileList);

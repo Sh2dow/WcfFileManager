@@ -9,13 +9,12 @@ namespace DemoWCFServiceApp
         public string FileName { get; set; }
 
         [DataMember]
-        public string path { get; set; }
+        public long? size { get; set; }
 
         [DataMember]
         public bool isDirectory { get; set; }
     }
 
-    //[DataContract]
     //public class FItem : FSItem
     //{
     //    public FItem()
@@ -24,7 +23,6 @@ namespace DemoWCFServiceApp
     //    }
     //}
 
-    //[DataContract]
     //public class DItem : FSItem
     //{
     //    public DItem()
@@ -33,7 +31,6 @@ namespace DemoWCFServiceApp
     //    }
     //}
 
-    //[DataContract]
     //public class PItem : FSItem
     //{
     //    //public List<Int64> NestedItems { get; set; }

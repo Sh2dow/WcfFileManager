@@ -9,8 +9,8 @@ namespace WebApplication.Models
         [DisplayName("Name")]
         public string FileName { get; set; }
         [Required]
-        [DisplayName("path")]
-        public string path { get; set; }
+        [DisplayName("size")]
+        public long? size { get; set; }
         public bool isDirectory { get; set; }
     }
 

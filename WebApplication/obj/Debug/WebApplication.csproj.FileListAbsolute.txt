@@ -86,3 +86,4 @@ C:\Users\sh2dow\Documents\Visual Studio 2015\Projects\WcfFileManager\WebApplicat
 C:\Users\sh2dow\Documents\Visual Studio 2015\Projects\WcfFileManager\WebApplication\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\sh2dow\Documents\Visual Studio 2015\Projects\WcfFileManager\WebApplication\obj\Debug\WebApplication.dll
 C:\Users\sh2dow\Documents\Visual Studio 2015\Projects\WcfFileManager\WebApplication\obj\Debug\WebApplication.pdb
+C:\Users\sh2dow\Documents\Visual Studio 2015\Projects\WcfFileManager\WebApplication\obj\Debug\WebApplication.csprojResolveAssemblyReference.cache

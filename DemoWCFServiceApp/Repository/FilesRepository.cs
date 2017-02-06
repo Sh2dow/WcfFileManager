@@ -46,7 +46,7 @@ namespace DemoWCFServiceApp.Repository
                                                 .Select(fi => new FSItem
                                                 {
                                                     FileName = fi.Name,
-                                                    path = path + @"\" + fi.Name,
+                                                    size = fi.Length,
                                                     isDirectory = false
                                                 })
                                                 .ToList();
@@ -55,13 +55,11 @@ namespace DemoWCFServiceApp.Repository
                                                     .Select(di => new FSItem
                                                     {
                                                         FileName = di.Name,
-                                                        path = path + @"\" + di.Name,
                                                         isDirectory = true
                                                     })
                                                     .ToList();
                         fsitems.Add(new FSItem
                         {
-                            path = fipath,
                             FileName = localPath,
                             isDirectory = true
                         });
@@ -72,7 +70,6 @@ namespace DemoWCFServiceApp.Repository
                     {
                         fsitems.Add(new FSItem
                         {
-                            path = fipath,
                             FileName = localPath,
                             isDirectory = true
                         });
@@ -88,14 +85,13 @@ namespace DemoWCFServiceApp.Repository
                                                 .Select(di => new FSItem
                                                 {
                                                     FileName = di.FirstOrDefault().ToString() + @":\",
-                                                    path = di.FirstOrDefault().ToString() + @":\",
                                                     isDirectory = true
                                                 })
                                                 .ToList();
                     fsitems.Add(new FSItem
                     {
-                        path = "secret",
-                        FileName = "My Computer",
+                        //FileName = "My Computer",
+                        FileName = "secret",
                     });
                     fsitems.AddRange(drives);
                 });

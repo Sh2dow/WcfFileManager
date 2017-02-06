@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using DemoWCFServiceApp.Repository;
 using System;
+using System.Collections;
 
 namespace DemoWCFServiceApp
 {
