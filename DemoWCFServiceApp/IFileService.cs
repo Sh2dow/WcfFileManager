@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ServiceModel;
 using System.ServiceModel.Web;
+using System.Threading.Tasks;
 
 namespace DemoWCFServiceApp
 {
@@ -8,7 +9,8 @@ namespace DemoWCFServiceApp
     public interface IFileService
     {
         // WebGet attribute is used to make GET request in WCF REST service
-        [WebGet(ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "GetAllFiles?path={path}")]
+        [WebInvoke(ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json, Method = "GET", UriTemplate = "GetAllFiles?path={path}")]
+        //[WebGet(ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "GetAllFiles?path={path}")]
         //[WebInvoke(ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json, Method = "POST", UriTemplate = "GetAllFiles/{path}")]
         IEnumerable<FSItem> GetAllFiles(string path);
 

@@ -44,7 +44,7 @@
             return fsManagerClient.get({ path: path })
             .$promise
             .then(function (result) {
-                result.fsitems
+                result
                         .forEach(function (path) {
                             service.fsitems.push(path);
                         });
@@ -60,14 +60,23 @@
 
     fsManagerClient.$inject = ['$resource'];
 
+    //function fsManagerClient($resource) {
+    //    return $resource("http://localhost:1786/FileService.svc", { path: "@path" },
+    //            {
+    //                get: { method: 'GET', isArray: true },
+    //                query: { method: 'GET', isArray: true },
+    //                save: { method: 'POST', transformRequest: angular.identity, headers: { 'Content-Type': undefined } },
+    //                remove: { method: 'DELETE', url: 'api/photo/:fileName', params: { name: '@fileName' } }
+    //            });
+    //}
+
     function fsManagerClient($resource) {
-        return $resource("http://localhost:1786/FileService.svc/GetAllFiles/:path",
-                { id: "@path" },
+        return $resource("http://localhost:1786/FileService.svc/GetAllFiles?:path", { path: "@path" },
                 {
-                    'get': { method: 'GET', url: 'http://localhost:1786/FileService.svc/GetAllFiles?path=:path', params: { path: '@path' } },
-                    //'query': { method: 'GET' },
-                    'save': { method: 'POST', transformRequest: angular.identity, headers: { 'Content-Type': undefined } },
-                    'remove': { method: 'DELETE', url: 'api/photo/:fileName', params: { name: '@fileName' } }
+                    get: { method: 'GET', isArray: true },
+                    save: { method: 'POST', transformRequest: angular.identity, headers: { 'Content-Type': undefined } },
+                    edit: { method: 'PUT' },
+                    remove: { method: 'DELETE', params: { name: '@fileName' } }
                 });
     }
 

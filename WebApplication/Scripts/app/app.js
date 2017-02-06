@@ -24,15 +24,13 @@ $('.edit-button').on("click", function () {
         if (allEditableRow.length == 1 && $(this).attr('src') == '/Content/images/save.jpg')
         {
                       
-            var selectedId = $(this).parents('tr').find('td:nth-child(1)').text().trim();
             var selectedName = $(this).parents('tr').find('#FileName').val();
-            var selectedSize = $(this).parents('tr').find('#FileSize').val();
+            var selectedSize = $(this).parents('tr').find('#size').val();
             // create object with updated values
             var FileModel =
                 {
-                    "FileId": selectedId,
                     "FileName": selectedName,
-                    "FileSize": selectedSize
+                    "size": selectedSize
                 };
             $.ajax({
                 url: '/Home/EditFile',

@@ -7,21 +7,32 @@ using System.Net;
 using System.Runtime.Serialization.Json;
 using System.Web;
 using System.Web.Mvc;
+using System.Threading.Tasks;
 
 namespace WebApplication.Controllers
 {
     [Authorize]
     public class HomeController : Controller
     {
-        readonly string FileServiceUri = "http://localhost:1786/FileService.svc/";
+        readonly string FileServiceUri = "http://localhost:1786/FileService.svc/GetAllFiles";
 
-        public ActionResult Index()
+        //public ActionResult Index()
+        //{
+        //    return View();
+        //}
+
+        //run by MVC
+        public ActionResult Index(string path = "")
         {
             var FileList = new List<FSItem>();
             using (var webClient = new WebClient())
             {
-                var dwml = webClient.DownloadString(FileServiceUri + "GetAllFiles?path=" + HttpRuntime.AppDomainAppPath);
-                FileList.AddRange(JsonConvert.DeserializeObjectAsync<List<FSItem>>(dwml).Result);
+                string dwml;
+                if (path == "")
+                    dwml = webClient.DownloadString(FileServiceUri);
+                else
+                    dwml = webClient.DownloadString(FileServiceUri + "?path=" + path);
+                FileList.AddRange(Task.Factory.StartNew(() => JsonConvert.DeserializeObject<List<FSItem>>(dwml)).Result);
             }
             return View(FileList);
         }

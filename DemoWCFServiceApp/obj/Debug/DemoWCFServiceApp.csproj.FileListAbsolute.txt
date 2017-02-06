@@ -16,9 +16,9 @@ C:\Users\sh2dow\Documents\Visual Studio 2015\Projects\DemoWCFServiceApp\DemoWCFS
 C:\Users\sh2dow\Documents\Visual Studio 2015\Projects\DemoWCFServiceApp\DemoWCFServiceApp\obj\Debug\DemoWCFServiceApp.csprojResolveAssemblyReference.cache
 C:\Users\sh2dow\Documents\Visual Studio 2015\Projects\DemoWCFServiceApp\DemoWCFServiceApp\obj\Debug\DemoWCFServiceApp.dll
 C:\Users\sh2dow\Documents\Visual Studio 2015\Projects\DemoWCFServiceApp\DemoWCFServiceApp\obj\Debug\DemoWCFServiceApp.pdb
-C:\Users\sh2dow\Documents\Visual Studio 2015\Projects\WcfFileManager\DemoWCFServiceApp\bin\DemoWCFServiceApp.dll.config
-C:\Users\sh2dow\Documents\Visual Studio 2015\Projects\WcfFileManager\DemoWCFServiceApp\bin\DemoWCFServiceApp.dll
-C:\Users\sh2dow\Documents\Visual Studio 2015\Projects\WcfFileManager\DemoWCFServiceApp\bin\DemoWCFServiceApp.pdb
-C:\Users\sh2dow\Documents\Visual Studio 2015\Projects\WcfFileManager\DemoWCFServiceApp\obj\Debug\DemoWCFServiceApp.dll
-C:\Users\sh2dow\Documents\Visual Studio 2015\Projects\WcfFileManager\DemoWCFServiceApp\obj\Debug\DemoWCFServiceApp.pdb
+c:\Users\sh2dow\Documents\Visual Studio 2015\Projects\WcfFileManager\DemoWCFServiceApp\bin\DemoWCFServiceApp.dll.config
+c:\Users\sh2dow\Documents\Visual Studio 2015\Projects\WcfFileManager\DemoWCFServiceApp\bin\DemoWCFServiceApp.dll
+c:\Users\sh2dow\Documents\Visual Studio 2015\Projects\WcfFileManager\DemoWCFServiceApp\bin\DemoWCFServiceApp.pdb
+c:\Users\sh2dow\Documents\Visual Studio 2015\Projects\WcfFileManager\DemoWCFServiceApp\obj\Debug\DemoWCFServiceApp.dll
+c:\Users\sh2dow\Documents\Visual Studio 2015\Projects\WcfFileManager\DemoWCFServiceApp\obj\Debug\DemoWCFServiceApp.pdb
 C:\Users\sh2dow\Documents\Visual Studio 2015\Projects\WcfFileManager\DemoWCFServiceApp\obj\Debug\DemoWCFServiceApp.csprojResolveAssemblyReference.cache

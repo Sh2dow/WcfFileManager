@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using DemoWCFServiceApp.Repository;
 using System;
-using System.Collections;
 
 namespace DemoWCFServiceApp
 {
@@ -13,12 +12,12 @@ namespace DemoWCFServiceApp
         public FileService()
         {
             //this.path = path;
-            //FileRepository = new FileXmlRepository();
             FileRepository = new FilesRepository();
         }
 
         public IEnumerable<FSItem> GetAllFiles(string path)
         {
+            //if (path == null) path = AppDomain.CurrentDomain.BaseDirectory + "Fileserver";
             if (path == null) path = AppDomain.CurrentDomain.BaseDirectory;
             var allFile = FileRepository.GetAllFiles(path);
             return allFile;
