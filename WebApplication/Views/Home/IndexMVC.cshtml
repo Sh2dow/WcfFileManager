@@ -1,0 +1,35 @@
+﻿@model  IEnumerable<WebApplication.Models.FSItem>
+
+    <link href="~/Content/index.css" rel="stylesheet" />
+
+    <div id="Current path" style="padding: 17px 0px 5px 0px ">
+        <h3><span style="font: 600 16px arial">Current path:&nbsp;&nbsp;</span>
+        <span style="color: darkgrey; font: 500 16px arial">@Model.ElementAtOrDefault(0).FileName</span></h3>
+    </div>
+    @{
+        var grid = new WebGrid(Model, canPage: true, rowsPerPage: 25,
+        selectionFieldName: "selectedRow");
+        grid.Pager(WebGridPagerModes.NextPrevious);}
+
+    <div id="gridContent">
+            @grid.GetHtml(tableStyle: "webGrid",
+                    headerStyle: "header",
+                    alternatingRowStyle: "alt",
+                    selectedRowStyle: "select",
+                    rowStyle: "webgrid-row-style",
+                    columns: grid.Columns(
+
+                    grid.Column(columnName: "FileName", format: (item) => @Html.ActionLink((string)item.Filename,
+                    "", new { path = Model.ElementAtOrDefault(0).FileName + item.FileName })),
+
+                    grid.Column("size", "size", format: @<text>
+                        <span id="spnFileSize" class="display-mode">@item.size</span></text>,canSort: true),
+
+                    grid.Column("Action", format: @<text>
+                            <img src="~/Content/images/edit.jpg" title="Edit File" id="btnEdit" class="edit-button" />
+                            <img src="~/Content/images/delete.jpg" title="Delete File" class="delete-File" />
+                    </text>, canSort: false, style: "action")
+                                  ))
+
+        </div>
+@Scripts.Render("~/bundles/app")

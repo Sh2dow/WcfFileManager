@@ -1,51 +1,44 @@
-﻿@*@model  IEnumerable<WebApplication.Models.FSItem>
-
-    <link href="~/Content/index.css" rel="stylesheet" />
-
-    <div id="Current path" style="padding: 17px 0px 5px 0px ">
-        <h3><span style="font: 600 16px arial">Current path:&nbsp;&nbsp;</span>
-        <span style="color: darkgrey; font: 500 16px arial">@Model.ElementAtOrDefault(0).FileName</span></h3>
-    </div>
-    @{
-        var grid = new WebGrid(Model, canPage: true, rowsPerPage: 25,
-        selectionFieldName: "selectedRow");
-        grid.Pager(WebGridPagerModes.NextPrevious);}
-
-    <div id="gridContent">
-            @grid.GetHtml(tableStyle: "webGrid",
-                    headerStyle: "header",
-                    alternatingRowStyle: "alt",
-                    selectedRowStyle: "select",
-                    rowStyle: "webgrid-row-style",
-                    columns: grid.Columns(
-
-                    grid.Column(columnName: "FileName", format: (item) => @Html.ActionLink((string)item.Filename,
-                    "", new { path = Model.ElementAtOrDefault(0).FileName + item.FileName })),
-
-                    grid.Column("size", "size", format: @<text>
-                        <span id="spnFileSize" class="display-mode">@item.size</span></text>,canSort: true),
-
-                    grid.Column("Action", format: @<text>
-                            <img src="~/Content/images/edit.jpg" title="Edit File" id="btnEdit" class="edit-button" />
-                            <img src="~/Content/images/delete.jpg" title="Delete File" class="delete-File" />
-                    </text>, canSort: false, style: "action")
-                                  ))
-
-        </div>*@
-
-<div ng-app="app">
-    <div ng-controller="fsitems as vm" ng-view="fsitems">
-        <div id="Current path" style="padding: 17px 0px 5px 0px ">
-            <h3><span style="font: 600 16px arial">Current path:&nbsp;&nbsp;</span><span style="color: darkgrey; font: 500 16px arial">{{vm.fsitems[0].FileName}}</span></h3>
+﻿<div ng-app="app" ng-cloak>
+    <div ng-controller="fsitems as vm" ng-view="fsitems" class="row">
+        <div class="col-md-12">
+            <h3>{{vm.title}}</h3>
         </div>
-        <div id="filelist" style="border: 2px solid #F3F3F3" ng-view>
-            <ul style="list-style: none; margin: -2px; padding: 2px">
-                <li ng-show="vm.fsitems.length === 0">no files</li>
-                <li><a href="" ng-click="vm.get(vm.fsitems[0].FileName+'\\..')" style='text-decoration : underline'>..</a></li>
-                <li ng-repeat="fsitem in vm.fsitems.slice(1)">
-                    <a href="" ng-click="vm.get(vm.fsitems[0].FileName+fsitem.FileName)" ng-style="fsitem.isDirectory === true ? { 'text-decoration':'none'} : { 'text-decoration':'underline' }">{{fsitem.FileName}}</a>
-                </li>
-            </ul>
+        <div class="row">
+            <div class="col-md-8">
+                <div id="Current path" style="padding: 17px 0px 5px 0px ">
+                    <h3><span style="font: 600 16px arial">Current path:&nbsp;&nbsp;</span><span style="color: darkgrey; font: 500 16px arial">{{vm.fsitems[0].FileName}}</span></h3>
+                </div>
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-info active">
+                        <div class="row">
+                            <div class="col-lg-8">name</div>
+                            <div class="col-lg-2">size (kb)</div>
+                            <div class="col-lg-2"></div>
+                        </div>
+                    </li>
+                    <li class="list-group-item" ng-show="vm.fsitems.length === 0">no files</li>
+                    <li class="list-group-item"><a ng-click=vm.load(vm.fsitems[0].FileName+'\\..') style='text-decoration : underline'>..</a></li>
+                    <li ng-repeat="fsitem in vm.fsitems.slice(1)" class="list-group-item">
+                        <div class="row">
+                            <div class="col-lg-8"><a ng-click=vm.load(vm.fsitems[0].FileName+fsitem.FileName) ng-style="fsitem.isDirectory === true ? { 'text-decoration':'none'} : { 'text-decoration':'underline' }">{{fsitem.FileName}}</a></div>
+                            <div class="col-lg-2">{{fsitem.size}}</div>
+                            <div class="col-lg-2">
+                                <button type="button" class="btn btn-xs btn-sm" ng-click="vm.edit(fsitem)">
+                                    <span class="glyphicon glyphicon-edit"></span>
+                                </button>
+                                <button type="button" class="btn btn-xs btn-danger" ng-click="vm.remove(fsitem)">
+                                    <span class="glyphicon glyphicon-remove"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <eg-app-status></eg-app-status>
+            </div>
         </div>
     </div>
 </div>

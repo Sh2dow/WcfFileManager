@@ -1034,6 +1034,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\CreateFile.cshtml" />
     <Content Include="Scripts\version.json" />
+    <Content Include="Views\Home\IndexMVC.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
