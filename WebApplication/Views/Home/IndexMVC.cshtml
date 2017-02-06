@@ -22,8 +22,8 @@
                     grid.Column(columnName: "FileName", format: (item) => @Html.ActionLink((string)item.Filename,
                     "", new { path = Model.ElementAtOrDefault(0).FileName + item.FileName })),
 
-                    grid.Column("size", "size", format: @<text>
-                        <span id="spnFileSize" class="display-mode">@item.size</span></text>,canSort: true),
+                    grid.Column("Attribute", "size", format: @<text>
+                        <span id="spnFileSize" class="display-mode">@item.Attribute</span></text>,canSort: true),
 
                     grid.Column("Action", format: @<text>
                             <img src="~/Content/images/edit.jpg" title="Edit File" id="btnEdit" class="edit-button" />

@@ -9,7 +9,7 @@ namespace DemoWCFServiceApp
         public string FileName { get; set; }
 
         [DataMember]
-        public long? size { get; set; }
+        public string Attribute { get; set; }
 
         [DataMember]
         public bool isDirectory { get; set; }

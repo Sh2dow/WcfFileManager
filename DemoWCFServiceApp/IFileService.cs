@@ -18,10 +18,11 @@ namespace DemoWCFServiceApp
         [WebInvoke(ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json, Method = "POST", UriTemplate = "AddFile")]
         void AddFile(FSItem File);
 
-        [WebInvoke(ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json, Method = "DELETE", UriTemplate = "DeleteFile")]
-        void DeleteFile(int id);
+        [OperationContract]
+        [WebInvoke(ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json, Method = "GET", UriTemplate = "DeleteFile?path={path}")]
+        void DeleteFile(string path);
 
-        [WebInvoke(ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json, Method = "PUT", UriTemplate = "EditFile")]
-        void EditFile(FSItem File);
+        [WebInvoke(ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json, Method = "POST", UriTemplate = "EditFile?name={name}&newname={newname}")]
+        void EditFile(string name, string newname);
     }
 }

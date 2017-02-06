@@ -46,7 +46,7 @@ namespace DemoWCFServiceApp.Repository
                                                 .Select(fi => new FSItem
                                                 {
                                                     FileName = fi.Name,
-                                                    size = fi.Length,
+                                                    Attribute = fi.Length.ToString(),
                                                     isDirectory = false
                                                 })
                                                 .ToList();
@@ -60,7 +60,8 @@ namespace DemoWCFServiceApp.Repository
                                                     .ToList();
                         fsitems.Add(new FSItem
                         {
-                            FileName = localPath,
+                            FileName = localPath + @"\",
+                            Attribute = fipath,
                             isDirectory = true
                         });
                         fsitems.AddRange(folders);
@@ -71,6 +72,7 @@ namespace DemoWCFServiceApp.Repository
                         fsitems.Add(new FSItem
                         {
                             FileName = localPath,
+                            Attribute = fipath,
                             isDirectory = true
                         });
                     }
@@ -91,7 +93,8 @@ namespace DemoWCFServiceApp.Repository
                     fsitems.Add(new FSItem
                     {
                         //FileName = "My Computer",
-                        FileName = "secret",
+                        FileName = "",
+                        Attribute = "secret"
                     });
                     fsitems.AddRange(drives);
                 });
@@ -106,25 +109,20 @@ namespace DemoWCFServiceApp.Repository
                                 .FirstOrDefault();
             return file != null;
         }
-        
+
         public void AddFile(FSItem File)
         {
             throw new NotImplementedException();
         }
 
-        public void DeleteFile(int id)
+        public void DeleteFile(string path)
         {
-            throw new NotImplementedException();
+            File.Delete(path);
         }
 
-        public void EditFile(FSItem File)
+        public void EditFile(string name, string newname)
         {
-            throw new NotImplementedException();
-        }
-
-        public int GetFilesCount()
-        {
-            throw new NotImplementedException();
+            File.Move(name, newname);
         }
     }
 }

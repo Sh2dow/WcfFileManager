@@ -28,14 +28,14 @@ namespace DemoWCFServiceApp
             FileRepository.AddFile(File);
         }
 
-        public void DeleteFile(int id)
+        public void DeleteFile(string path)
         {
-            FileRepository.DeleteFile(id);
+            FileRepository.DeleteFile(path);
         }
 
-        public void EditFile(FSItem File)
+        public void EditFile(string name, string newname)
         {
-            FileRepository.EditFile(File);
+            FileRepository.EditFile(name, newname);
         }
     }
 }

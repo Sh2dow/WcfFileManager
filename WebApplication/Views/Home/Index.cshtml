@@ -17,16 +17,16 @@
                         </div>
                     </li>
                     <li class="list-group-item" ng-show="vm.fsitems.length === 0">no files</li>
-                    <li class="list-group-item"><a ng-click=vm.load(vm.fsitems[0].FileName+'\\..') style='text-decoration : underline'>..</a></li>
+                    <li class="list-group-item"><a href="" ng-click=vm.load(vm.fsitems[0].Attribute) style='text-decoration : underline'>..</a></li>
                     <li ng-repeat="fsitem in vm.fsitems.slice(1)" class="list-group-item">
                         <div class="row">
-                            <div class="col-lg-8"><a ng-click=vm.load(vm.fsitems[0].FileName+fsitem.FileName) ng-style="fsitem.isDirectory === true ? { 'text-decoration':'none'} : { 'text-decoration':'underline' }">{{fsitem.FileName}}</a></div>
-                            <div class="col-lg-2">{{fsitem.size}}</div>
+                            <div class="col-lg-8"><a href="" ng-click=vm.load(vm.fsitems[0].FileName+fsitem.FileName) ng-style="fsitem.isDirectory === true ? { 'text-decoration':'none'} : { 'text-decoration':'underline' }">{{fsitem.FileName}}</a></div>
+                            <div class="col-lg-2">{{fsitem.Attribute}}</div>
                             <div class="col-lg-2">
-                                <button type="button" class="btn btn-xs btn-sm" ng-click="vm.edit(fsitem)">
+                                <button type="button" class="btn btn-xs btn-sm" ng-click="vm.edit(vm.fsitems[0].FileName+'/'+fsitem.FileName)">
                                     <span class="glyphicon glyphicon-edit"></span>
                                 </button>
-                                <button type="button" class="btn btn-xs btn-danger" ng-click="vm.remove(fsitem)">
+                                <button type="button" class="btn btn-xs btn-danger" ng-click="vm.remove(vm.fsitems[0].FileName+'/'+fsitem.FileName)">
                                     <span class="glyphicon glyphicon-remove"></span>
                                 </button>
                             </div>
