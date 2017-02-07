@@ -7,6 +7,6 @@ namespace DemoWCFServiceApp.Repository
         IEnumerable<FSItem> GetAllFiles(string path );
         void AddFile(FSItem File);
         void DeleteFile(string path);
-        void EditFile(string name, string newname);
+        void EditFile(string path, string name);
     }
 }

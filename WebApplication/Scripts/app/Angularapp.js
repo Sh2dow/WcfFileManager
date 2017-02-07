@@ -1,130 +1,164 @@
-﻿(function (angular) {
+﻿var app = angular.module('app', ['ngResource'])
 
-    var app = angular.module('app', ['ngResource'])
-    app.controller('fsitems', fsitems)
-    app.value('path', {
-        load: function (path) {
-            this.path = path;
-        }
-    });
+app.controller('fsitems', fsitems)
 
-    fsitems.$inject = ['fsManager'];
-
-    function fsitems(fsManager) {
-        /* jshint validthis:true */
-        var vm = this;
-        vm.title = 'FileManager';
-        vm.fsitems = fsManager.fsitems;
-        vm.load = fsManager.load;
-        vm.remove = fsManager.remove;
-
-        activate();
-
-        function activate() {
-            fsManager.load();
-        }
-
-        function remove(fsitem) {
-            photoManager.remove(fsitem).then(function () {
-                fsManager.load();
-            });
-        }
+app.value('path', {
+    load: function (path) {
+        this.path = path;
     }
+});
 
-    angular
-        .module('app')
-        .factory('fsManager', fsManager);
+fsitems.$inject = ['fsManager'];
 
-    fsManager.$inject = ['$q', 'fsManagerClient'];
+angular
+    .module('app');
 
-    function fsManager($q, fsManagerClient) {
-        var service = {
-            fsitems: [],
-            load: load,
-            edit: edit,
-            remove: remove
-        };
+function fsitems(fsManager) {
+    /* jshint validthis:true */
+    var vm = this;
+    vm.title = 'FileManager';
+    vm.fsitems = fsManager.fsitems;
+    vm.load = fsManager.load;
+    vm.edit = fsManager.edit;
+    vm.remove = fsManager.remove;
 
-        return service;
+    activate();
 
-        function load(path) {
-            console.log(path);
-            service.fsitems.length = 0;
-            return fsManagerClient.get({ path: path })
-            .$promise
-            .then(function (result) {
-                result
-                        .forEach(function (path) {
-                            service.fsitems.push(path);
-                        });
-
-                return result.$promise;
-            });
-        }
-
-        function edit(fsitem) {
-            return fsManagerClient.edit({ fileName: fsitem.name })
-                                        .$promise
-                                        .then(function (result) {
-                                            //if the fsitem was edited
-                                            var i = service.fsitems.indexOf(fsitem);
-                                            service.fsitems.splice(i, 1);
-
-                                            appInfo.setInfo({ message: "filename edit" });
-
-                                            return result.$promise;
-                                        },
-                                        function (result) {
-                                            appInfo.setInfo({ message: "something went wrong: " + result.data.message });
-                                            return $q.reject(result);
-                                        })
-                                        ['finally'](
-                                        function () {
-                                            appInfo.setInfo({ busy: false });
-                                        });
-        }
-
-
-        function remove(fsitem) {
-            return fsManagerClient.remove({ path: fsitem })
-                                        .$promise
-                                        .then(function (result) {
-                                            //if the fsitem was deleted successfully remove it from the fsitems array
-                                            var i = service.fsitems.indexOf(fsitem);
-                                            service.fsitems.splice(i, 1);
-
-
-                                            return result.$promise;
-                                        },
-                                        function (result) {
-                                            return $q.reject(result);
-                                        })
-                                        ['finally'](
-                                        function () {
-                                            console.log('file ' + fsitem + ' was deleted.');
-                                        });
-        }
+    function activate() {
+        console.log('loading...');
+        fsManager.load();
     }
+}
 
-    angular
-        .module('app')
-        .factory('fsManagerClient', fsManagerClient);
+angular
+    .module('app')
+    .factory('fsManager', fsManager);
 
-    fsManagerClient.$inject = ['$resource'];
+fsManager.$inject = ['$q', 'fsManagerClient'];
 
-    function fsManagerClient($resource) {
-        return $resource("http://localhost:1786/FileService.svc/:path", { path: "@path" },
-                {
-                    //'get': { method: 'GET', isArray: true },
-                    'get': { method: 'GET', url: 'http://localhost:1786/FileService.svc/GetAllFiles/:fileName', isArray: true, params: { path: '@path' } },
-                    'save': { method: 'POST', url: 'http://localhost:1786/FileService.svc/AddFile/:fileName', transformRequest: angular.identity, headers: { 'Content-Type': undefined }, params: { name: '@fileName' } },
-                    'edit': { method: 'POST', url: 'http://localhost:1786/FileService.svc/EditFile/:fileName', params: { name: '@path', newname: '@newname' } },
-                    'remove': { method: 'GET', url: 'http://localhost:1786/FileService.svc/DeleteFile/:fileName', params: { path: '@path' } },
+function fsManager($q, fsManagerClient) {
+    var service = {
+        fsitems: [],
+        load: load,
+        edit: edit,
+        remove: remove
+    };
 
-                });
-    }
+    return service;
 
-    app.run(
-        function ($rootScope) {
+    function load(path) {
+        console.log(path);
+        service.fsitems.length = 0;
+        return fsManagerClient.get({ path })
+        .$promise
+        .then(function (result) {
+            result
+                    .forEach(function (path) {
+                        service.fsitems.push(path);
+                    });
+
+            return result.$promise;
         });
-})(window.angular);
+    }
+
+    function edit(path, name) {
+        return fsManagerClient.edit({path, name})
+                                    .$promise
+                                    .then(function (result) {
+                                        //if the fsitem was edited
+
+                                        var i = service.fsitems.indexOf(path);
+                                        service.fsitems.splice(i, 1);
+
+                                        return result.$promise;
+                                    },
+                                    function (result) {
+                                        return $q.reject(result);
+                                    })
+                                    ['finally'](
+                                    function () {
+                                        console.log('file ' + name + ' was renamed.');
+                                    });
+    }
+
+
+    function remove(path) {
+        return fsManagerClient.remove({ path })
+                                    .$promise
+                                    .then(function (result) {
+                                        //if the fsitem was deleted successfully remove it from the fsitems array
+                                        var i = service.fsitems.indexOf(path);
+                                        service.fsitems.splice(i, 1);
+
+                                        return result.$promise;
+                                    },
+                                    function (result) {
+                                        return $q.reject(result);
+                                    })
+                                    ['finally'](
+                                    function () {
+                                        console.log('file ' + path + ' was deleted.');
+                                    });
+    }
+}
+
+angular
+    .module('app')
+    .factory('fsManagerClient', fsManagerClient);
+
+fsManagerClient.$inject = ['$resource'];
+
+function fsManagerClient($resource) {
+    return $resource("http://localhost:1786/FileService.svc/:path", { path: "@path" },
+            {
+                //'get': { method: 'GET', isArray: true },
+                'get': { method: 'GET', url: 'http://localhost:1786/FileService.svc/GetAllFiles/:fileName', isArray: true, params: { path: '@path' } },
+                'save': { method: 'POST', url: 'http://localhost:1786/FileService.svc/AddFile/:fileName', transformRequest: angular.identity, headers: { 'Content-Type': undefined }, params: { name: '@fileName' } },
+                'edit': { method: 'GET', url: 'http://localhost:1786/FileService.svc/EditFile/:fileName', params: { path: '@path', name: '@name' } },
+                'remove': { method: 'GET', url: 'http://localhost:1786/FileService.svc/DeleteFile/:fileName', params: { path: '@path' } },
+
+            });
+}
+
+
+angular
+        .module('app.b', ['app'])
+        .controller('AppKeysCtrl', AppKeysCtrl);
+
+function AppKeysCtrl($scope, $http, $location) {
+    $scope.oldField = {};
+    $scope.newField = {};
+    $scope.editing = false;
+
+    $scope.appkeys = [];
+
+    $scope.editAppKey = function (field) {
+        $scope.editing = $scope.appkeys.indexOf(field);
+        $scope.oldField = field;
+        $scope.newField = angular.copy(field);
+        console.log('editAppKey');
+    }
+
+    $scope.saveField = function (index) {
+        if ($scope.editing !== false) {
+            $scope.appkeys[$scope.editing] = $scope.newField;
+            $scope.editing = false;
+        }
+        console.log('saveField');
+    };
+
+    $scope.cancel = function (index) {
+        if ($scope.editing !== false) {
+            $scope.appkeys[$scope.editing] = $scope.newField;
+            $scope.editing = false;
+        }
+        console.log(index + ' cancel');
+    };
+}
+
+//app.run(function ($rootScope) {
+//});
+
+angular.element(document).ready(function () {
+    //angular.bootstrap(document, ["app"]);
+});

@@ -7,18 +7,15 @@ namespace DemoWCFServiceApp
     public class FileService : IFileService
     {
         private IFileRepository FileRepository;
-        private string path { get; set; }
 
         public FileService()
         {
-            //this.path = path;
             FileRepository = new FilesRepository();
         }
 
         public IEnumerable<FSItem> GetAllFiles(string path)
         {
-            //if (path == null) path = AppDomain.CurrentDomain.BaseDirectory + "Fileserver";
-            if (path == null) path = AppDomain.CurrentDomain.BaseDirectory;
+            if (path == null) path = AppDomain.CurrentDomain.BaseDirectory + "Fileserver";
             var allFile = FileRepository.GetAllFiles(path);
             return allFile;
         }

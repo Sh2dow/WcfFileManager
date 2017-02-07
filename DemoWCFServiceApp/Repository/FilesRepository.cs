@@ -11,7 +11,6 @@ namespace DemoWCFServiceApp.Repository
     {
         private List<FSItem> fsitems;
         private string localPath { get; set; }
-        //private string filePath = AppDomain.CurrentDomain.BaseDirectory;
 
         public FilesRepository()
         {
@@ -19,8 +18,7 @@ namespace DemoWCFServiceApp.Repository
 
         IEnumerable<FSItem> IFileRepository.GetAllFiles(string path)
         {
-            this.localPath = path == "secret" ? "secret" : HttpUtility.UrlDecode(path);
-            //localPath = path == "secret" ? "secret" : path;
+            localPath = path == "secret" ? "secret" : HttpUtility.UrlDecode(path);
             var json = GetAllFiles(localPath).Result;
             return json;
         }
@@ -28,7 +26,6 @@ namespace DemoWCFServiceApp.Repository
         public async Task<IEnumerable<FSItem>> GetAllFiles(string path)
         {
             var fsFolder = new DirectoryInfo(this.localPath);
-            //path = HttpUtility.UrlPathEncode(fsFolder.FullName);
             fsitems = new List<FSItem>();
             if (localPath != "secret" && new DriveInfo(Directory.GetDirectoryRoot(localPath)).IsReady)
             {
@@ -120,9 +117,10 @@ namespace DemoWCFServiceApp.Repository
             File.Delete(path);
         }
 
-        public void EditFile(string name, string newname)
+        public void EditFile(string path, string name)
         {
-            File.Move(name, newname);
+            var location = new FileInfo(path).Directory.FullName;
+            File.Move(path, location + @"\" + name);
         }
     }
 }

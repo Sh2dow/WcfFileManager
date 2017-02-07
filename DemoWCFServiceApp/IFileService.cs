@@ -10,8 +10,6 @@ namespace DemoWCFServiceApp
     {
         // WebGet attribute is used to make GET request in WCF REST service
         [WebInvoke(ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json, Method = "GET", UriTemplate = "GetAllFiles?path={path}")]
-        //[WebGet(ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "GetAllFiles?path={path}")]
-        //[WebInvoke(ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json, Method = "POST", UriTemplate = "GetAllFiles/{path}")]
         IEnumerable<FSItem> GetAllFiles(string path);
 
         // WebInvoke attribute is used to make POST, DELETE and PUT request in WCF REST service
@@ -22,7 +20,7 @@ namespace DemoWCFServiceApp
         [WebInvoke(ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json, Method = "GET", UriTemplate = "DeleteFile?path={path}")]
         void DeleteFile(string path);
 
-        [WebInvoke(ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json, Method = "POST", UriTemplate = "EditFile?name={name}&newname={newname}")]
-        void EditFile(string name, string newname);
+        [WebInvoke(ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json, Method = "GET", UriTemplate = "EditFile?path={path}&name={name}")]
+        void EditFile(string path, string name);
     }
 }
