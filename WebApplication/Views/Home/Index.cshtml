@@ -1,68 +1,56 @@
-﻿<div ng-app="app.b" ng-cloak>
-    <div ng-controller="AppKeysCtrl" class="row">
-        <div ng-controller="fsitems as vm" class="row">
-            <h3>{{vm.title}}</h3>
-            <div id="Current path">
-                <h3>
+﻿<div ng-app="app.b" ng-cloak class="row">
+    <div ng-controller="AppKeysCtrl">
+        <div ng-controller="fsitems as vm">
+            <div class="col-md-9" id="Current path">
+                <h3>{{vm.title}}<br/>
                     <span style="font: 600 16px arial">Current path:</span><br />
                     <span style="color: darkgrey; font: 500 16px arial">{{vm.fsitems[0].FileName}}</span>
                 </h3>
             </div>
-            <div class="row">
-                <div class="col-md-9">
-                    <ul class="list-group">
-                        <li class="list-group-item list-group-item-info active">
-                            <div class="row">
-                                <div class="col-lg-8">Filename</div>
-                                <div class="col-lg-2">Size (bytes)</div>
-                                <div class="col-lg-2"></div>
+            <div class="col-md-9">
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-info active">
+                        <div class="row">
+                            <div class="col-lg-8">Filename</div>
+                            <div class="col-lg-2">Size (bytes)</div>
+                            <div class="col-lg-2">
+                                <button type="submit" data-ng-click="vm.load(vm.fsitems[0].FileName.slice(0,-1))" class="btn btn-xs btn-default">
+                                    <span class="glyphicon glyphicon-refresh"></span>
+                                </button>
+                                <button type="submit" data-ng-click="vm.load()" class="btn btn-xs btn-default">
+                                    <span class="glyphicon glyphicon-home"></span>
+                                </button>
                             </div>
-                        </li>
-                        <li class="list-group-item" ng-show="vm.fsitems.length === 0">no files</li>
-                        <li class="list-group-item"><a href="" ng-click=vm.load(vm.fsitems[0].Attribute) style='text-decoration : underline'>..</a></li>
-                        <li data-ng-repeat="fsitem in vm.fsitems.slice(1)" class="list-group-item">
-                            <div class="row">
-                                <div class="col-lg-8">
-                                    @*<span data-ng-show="editMode" data-ng-required >{{fsitem.FileName}}</span>*@
-                                    <input type="text" data-ng-show="editMode" data-ng-model="fsitem.FileName" value="{{fsitem.FileName}}" />
-                                    <a href="" data-ng-hide="editMode" data-ng-model="fsitem"
-                                       ng-click="value = vm.load(vm.fsitems[0].FileName+fsitem.FileName)"
-                                       ng-style="fsitem.isDirectory === true ? { 'text-decoration':'none'} : { 'text-decoration':'underline' }">{{fsitem.FileName}}</a>
-                                </div>
-                                <div class="col-lg-2">{{fsitem.Attribute}}</div>
-                                <div class="col-lg-2">
-                                    <button type="submit" data-ng-hide="editMode" data-ng-click="editMode = true; editAppKey(fsitem)" class="btn btn-xs btn-sm">
-                                        <span class="glyphicon glyphicon-edit"></span>
-                                    </button>
-                                    <button type="submit" data-ng-show="editMode" data-ng-click="editMode = false; vm.edit(vm.fsitems[0].FileName+'/'+newField.FileName,fsitem.FileName)" class="btn btn-xs btn-default">
-                                        <span class="glyphicon glyphicon-ok"></span>
-                                    </button>
-                                    <button type="submit" data-ng-show="editMode" data-ng-click="editMode = false; cancel()" class="btn btn-xs btn-default">
-                                        <span class="glyphicon glyphicon-ban-circle"></span>
-                                    </button>
-                                    @*<button type="button" class="btn btn-xs btn-sm" ng-click="vm.edit(vm.fsitems[0].FileName+'/'+fsitem.FileName)">
-                                        </button>*@
-                                    <button type="button" class="btn btn-xs btn-danger" ng-click="vm.remove(vm.fsitems[0].FileName+'/'+fsitem.FileName)">
-                                        <span class="glyphicon glyphicon-remove"></span>
-                                    </button>
-                                </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item" ng-show="vm.fsitems.length === 0">no files</li>
+                    <li class="list-group-item"><a href="" ng-click=vm.load(vm.fsitems[0].Attribute) style='text-decoration : underline'>..</a></li>
+                    <li data-ng-repeat="fsitem in vm.fsitems.slice(1)" class="list-group-item">
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <input type="text" data-ng-show="editMode" data-ng-model="fsitem.FileName" value="{{fsitem.FileName}}" />
+                                <a href="" data-ng-hide="editMode" data-ng-model="fsitem"
+                                   ng-click="value = vm.load(vm.fsitems[0].FileName+fsitem.FileName)"
+                                   ng-style="fsitem.isDirectory === true ? { 'text-decoration':'none'} : { 'text-decoration':'underline' }">{{fsitem.FileName}}</a>
                             </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-9">
-                    <eg-app-status>
-                        <button type="submit" data-ng-click="refresh()" class="btn btn-xs btn-default">
-                            <span class="glyphicon glyphicon-refresh"></span>
-                        </button>
-                        <pre>fsitem: {{fsitem}}</pre><br /><br />
-                        <pre>oldField: {{oldField|json}}</pre><br /><br />
-                        <pre>newField: {{newField|json}}</pre><br /><br />
-                        <pre>appkeys: {{vm.fsitems|json}}</pre>
-                    </eg-app-status>
-                </div>
+                            <div class="col-lg-2">{{fsitem.Attribute}}</div>
+                            <div class="col-lg-2">
+                                <button type="submit" data-ng-hide="editMode" data-ng-click="editMode = true; editAppKey(fsitem)" class="btn btn-xs btn-sm">
+                                    <span class="glyphicon glyphicon-edit"></span>
+                                </button>
+                                <button type="submit" data-ng-show="editMode" data-ng-click="editMode = false; vm.edit(vm.fsitems[0].FileName+'/'+newField.FileName,fsitem.FileName)" class="btn btn-xs btn-default">
+                                    <span class="glyphicon glyphicon-ok"></span>
+                                </button>
+                                @*<button type="submit" data-ng-show="editMode" data-ng-click="editMode = false; cancel()" class="btn btn-xs btn-default">
+                                    <span class="glyphicon glyphicon-ban-circle"></span>
+                                    </button>*@
+                                <button type="button" class="btn btn-xs btn-danger" ng-click="vm.remove(vm.fsitems[0].FileName+'/'+fsitem.FileName)">
+                                    <span class="glyphicon glyphicon-remove"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>

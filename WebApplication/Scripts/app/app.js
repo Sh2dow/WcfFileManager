@@ -66,10 +66,6 @@ function fsManager($q, fsManagerClient) {
                                     .$promise
                                     .then(function (result) {
                                         //if the fsitem was edited
-
-                                        var i = service.fsitems.indexOf(path);
-                                        service.fsitems.splice(i, 1);
-
                                         return result.$promise;
                                     },
                                     function (result) {
